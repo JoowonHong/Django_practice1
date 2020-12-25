@@ -28,8 +28,4 @@ def register(request):
 
             fcuser.save()
 
-
-        
-
-
         return render(request,'register.html',res_data)
