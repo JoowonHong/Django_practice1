@@ -1,7 +1,7 @@
 from django import forms
 from .models import Fcuser
 from django.contrib.auth.hashers import check_password
-
+from django.core.exceptions import ObjectDoesNotExist
 class LoginForm(forms.Form):
     username = forms.CharField(error_messages={'required':'아이디를 입력해주세요'},
      max_length=32,label = "사용자 이름")
@@ -14,7 +14,13 @@ class LoginForm(forms.Form):
         password = cleaned_data.get('password') 
 
         if username and password:
-            fcuser = Fcuser.objects.get(username=username)
+            try:
+                fcuser = Fcuser.objects.get(username=username)
+            #except Fcuser.DoesNotExist:
+            except ObjectDoesNotExist:
+                self.add_error('username','아이디가 없습니다.')
+                return
+
             if not check_password(password, fcuser.password):
                 self.add_error('password','비밀번호가 틀렸습니다.')
             else:
