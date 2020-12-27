@@ -12,7 +12,10 @@ def home(request):
         return HttpResponse(fcuser.username)
     return HttpResponse('Home!')
 
-
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+    return redirect('/')
 
 def login(request):
     if request.method=="GET":
@@ -29,7 +32,7 @@ def login(request):
             fcuser = Fcuser.objects.get(username=username)
             if check_password(password,fcuser.password):
                 request.session['user']=fcuser.id
-
+                
                 return redirect('/')
 
                 #비밀번호가 일치,로그인 처리를!
