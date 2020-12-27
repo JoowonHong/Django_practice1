@@ -1,59 +1,45 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
-        <link rel = "stylesheet", href="/static/bootstrap.min.css"/>
+{% extends "base.html" %}
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-      
-    </head>
-    
-    <body>
-        <div calss="container">
-            <div class="row mt-5">
-                <div class= "col-12 text-center">
-                    <h1>로그인</h1>
-                </div>
+{% block contents %}
+<div class="row mt-5">
+    <div class= "col-12 text-center">
+        <h1>로그인</h1>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class= "col-12">
+        {{ error }}
+    </div>>
+
+</div>
+<div class="row mt-5">
+    <div class= "col-12">
+        <form method="POST" action=".">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="username">사용자 이름</label>
+                <input type="text" 
+                class="form-control" 
+                id="username"
+                placeholder="사용자 이름"
+                name="username"
+            />
             </div>
-            <div class="row mt-5">
-                <div class= "col-12">
-                    {{ error }}
-                </div>>
-
+        
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="비밀번호"
+                    name = "password"
+                    />
             </div>
-            <div class="row mt-5">
-                <div class= "col-12">
-                    <form method="POST" action=".">
-                        {% csrf_token %}
+            
+            <button type="submit" class="btn btn-primary">로그인</button>
+            </form>
+    </div>
+</div>
 
-                        <div class="form-group">
-                          <label for="username">사용자 이름</label>
-                          <input type="text" 
-                          class="form-control" 
-                          id="username"
-                            placeholder="사용자 이름"
-                            name="username"
-                        />
-                        </div>
-                    
-                        <div class="form-group">
-                          <label for="password">비밀번호</label>
-                          <input type="password"
-                                class="form-control"
-                                id="password"
-                                placeholder="비밀번호"
-                                name = "password"
-                                />
-                        </div>
-                       
-                        <button type="submit" class="btn btn-primary">로그인</button>
-                      </form>
-                </div>
-            </div>
-        </div>
-    </body>
-
-</html>
+{% endblock %}
