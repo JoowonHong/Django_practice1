@@ -19,7 +19,15 @@ def logout(request):
     return redirect('/')
 
 def login(request):
-    form= LoginForm()
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            request.session['user']= form.user_id
+    
+            #session
+            return redirect('/')
+    else:
+        form = LoginForm()
     return render(request,'login.html',{'form':form})
 
 
