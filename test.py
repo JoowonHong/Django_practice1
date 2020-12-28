@@ -3,7 +3,7 @@ import datetime
 
 now= datetime.datetime.now()
 
-nowDatetime = sqnow.strftime('%Y-%m-%d %H:%M:%S')
+nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
 print('nowDatetime : ',nowDatetime)
 print("now: ", now)
 
